@@ -40,6 +40,8 @@ You may format your output to whatever you'd like! Here is a key:
 - `{n}` A new line (or `\n`). Example: `{n}`
 - `{depth}` The depth to go. Example: `Depth ${depth}`
 
+> Note: Restart/Refresh discord after changing a setting!
+
 ---
 
 ## Snippet
