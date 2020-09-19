@@ -13,3 +13,7 @@ People in the powercord discord server wanted it, so I made it :sunglasses:
 ---
 
 Sxmurai - 2020
+
+---
+
+ANYTHING YOU DO WITH THIS, I AM __NOT__ LIABLE FOR! YOU ARE AT FAULT FOR WHATEVER YOU DO!
