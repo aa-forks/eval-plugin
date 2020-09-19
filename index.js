@@ -53,7 +53,8 @@ module.exports = class EvalCommand extends Plugin {
               )
               .replace(new RegExp("{n}", "gi"), "\n")
               .replace(
-                new RegExp("{input}", `\`\`\`js\n${args.join(" ")}\`\`\``)
+                new RegExp("{input}", "gi"),
+                `\`\`\`js\n${args.join(" ")}\`\`\``
               ),
           };
         } catch (error) {
