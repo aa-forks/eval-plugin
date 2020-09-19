@@ -51,7 +51,10 @@ module.exports = class EvalCommand extends Plugin {
                   .replace(powercord.account.token, replace)
                   .substring(0, 1950)}\`\`\``
               )
-              .replace(new RegExp("{n}", "gi"), "\n"),
+              .replace(new RegExp("{n}", "gi"), "\n")
+              .replace(
+                new RegExp("{input}", `\`\`\`js\n${args.join(" ")}\`\`\``)
+              ),
           };
         } catch (error) {
           return {
