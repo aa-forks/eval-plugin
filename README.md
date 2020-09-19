@@ -44,7 +44,21 @@ You may format your output to whatever you'd like! Here is a key:
 
 ## Snippet
 
+Basic Command Usage:
+
 ![alt text](https://i.imgur.com/ZPJiiQY.gif "Example Usage")
+
+Depth Usage:
+
+![alt text](https://i.imgur.com/xxKqFuF.gif, "Example Usage")
+
+---
+
+## Suggestions
+
+Do you want something added to the eval plugin? Make an issue, and I'll respond as quick as I can!
+
+If you have programming knowledge, fork and make a PR, I'll look into it as quick as I can!
 
 ---
 
