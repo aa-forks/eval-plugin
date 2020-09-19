@@ -6,6 +6,12 @@ const Settings = require("./Settings.jsx");
 module.exports = class EvalCommand extends Plugin {
   startPlugin() {
     const replace = this.settings.get("tokenReplacer", "[REDACTED]");
+    const format = this.settings.get(
+      "evalFormat",
+      "⏱️ Took {time}{n}🔍 Typeof {type}{n}{output}"
+    );
+
+    console.log(format);
 
     powercord.api.settings.registerSettings("pc-evalcommand", {
       category: this.entityID,
@@ -34,14 +40,20 @@ module.exports = class EvalCommand extends Plugin {
 
           return {
             send: false,
-            result: [
-              `⏱️ Took:  ${hr[0] > 0 ? `${hr[0]}s ` : ""}${hr[1] / 1000000}ms`,
-              `🔍 Type: ${EvalCommand.type(toEval)}`,
-              `\`\`\`js\n${evaluated
-                .toString()
-                .replace(powercord.account.token, replace)
-                .substring(0, 1950)}\`\`\``,
-            ].join("\n"),
+            result: format
+              .replace(
+                new RegExp("{time}", "gi"),
+                `${hr[0] > 0 ? `${hr[0]}s ` : ""}${hr[1] / 1000000}ms`
+              )
+              .replace(new RegExp("{type}", "gi"), EvalCommand.type(toEval))
+              .replace(
+                new RegExp(`{output}`, "gi"),
+                `\`\`\`js\n${evaluated
+                  .toString()
+                  .replace(powercord.account.token, replace)
+                  .substring(0, 1950)}\`\`\``
+              )
+              .replace(new RegExp("{n}", "gi"), "\n"),
           };
         } catch (error) {
           return {
@@ -55,6 +67,7 @@ module.exports = class EvalCommand extends Plugin {
 
   pluginWillUnload() {
     powercord.api.commands.unregisterCommand("eval");
+    powercord.api.settings.unregisterSettings("pc-evalcommand");
   }
 
   static type(value) {
