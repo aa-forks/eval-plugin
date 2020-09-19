@@ -7,13 +7,10 @@ const {
 
 const Settings = require("./Settings.jsx");
 
+const autoComplete = [];
+
 module.exports = class EvalCommand extends Plugin {
   startPlugin() {
-    const autoComplete = (powercord.pluginManager.plugins.get(
-      "pc-evalcommand"
-    ).messages =
-      powercord.pluginManager.plugins.get("pc-evalcommand").messages ?? []);
-
     const replace = this.settings.get("tokenReplacer", "[REDACTED]");
     const format = this.settings.get(
       "evalFormat",
@@ -103,12 +100,9 @@ module.exports = class EvalCommand extends Plugin {
       autocomplete(args) {
         if (!args || !args.length) return false;
 
-        const messages = powercord.pluginManager.plugins.get("pc-evalcommand")
-          .messages;
-
         return {
           header: `Auto Complete`,
-          commands: messages
+          commands: autoComplete
             .filter((msg) =>
               msg.toLowerCase().includes(args.join(" ").toLowerCase())
             )
@@ -121,6 +115,5 @@ module.exports = class EvalCommand extends Plugin {
   pluginWillUnload() {
     powercord.api.commands.unregisterCommand("eval");
     powercord.api.settings.unregisterSettings("pc-evalcommand");
-    delete powercord.pluginManager.plugins.get("pc-evalcommand").messages;
   }
 };
