@@ -1,7 +1,18 @@
 const { Plugin } = require("powercord/entities");
+const { inspect } = require("util");
+
+const Settings = require("./Settings.jsx");
 
 module.exports = class EvalCommand extends Plugin {
   startPlugin() {
+    const replace = this.settings.get("tokenReplacer", "[REDACTED]");
+
+    powercord.api.settings.registerSettings("pc-evalcommand", {
+      category: this.entityID,
+      label: "Eval Command",
+      render: Settings,
+    });
+
     powercord.api.commands.registerCommand({
       command: "eval",
       aliases: ["evaluate"],
@@ -19,14 +30,16 @@ module.exports = class EvalCommand extends Plugin {
             hr = process.hrtime(hrstart);
           }
 
+          const evaluated = inspect(toEval, false);
+
           return {
             send: false,
             result: [
               `⏱️ Took:  ${hr[0] > 0 ? `${hr[0]}s ` : ""}${hr[1] / 1000000}ms`,
-              `🔍 Type: ${this.type(toEval)}`,
+              `🔍 Type: ${EvalCommand.type(toEval)}`,
               `\`\`\`js\n${evaluated
                 .toString()
-                .replace(powercord.account.token, "fuck off")
+                .replace(powercord.account.token, replace)
                 .substring(0, 1950)}\`\`\``,
             ].join("\n"),
           };
