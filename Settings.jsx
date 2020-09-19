@@ -10,5 +10,14 @@ module.exports = ({ getSetting, updateSetting }) => (
     >
       Token Replace
     </TextInput>
+
+    <TextInput
+      note="The output format"
+      defaultValue={getSetting(
+        "evalFormat",
+        "⏱️ Took {time}{n}🔍 Typeof {type}{n}{output}"
+      )}
+      onChange={(val) => updateSetting("evalFormat", val)}
+    ></TextInput>
   </div>
 );
