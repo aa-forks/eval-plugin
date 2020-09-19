@@ -11,8 +11,6 @@ module.exports = class EvalCommand extends Plugin {
       "⏱️ Took {time}{n}🔍 Typeof {type}{n}{output}"
     );
 
-    console.log(format);
-
     powercord.api.settings.registerSettings("pc-evalcommand", {
       category: this.entityID,
       label: "Eval Command",
