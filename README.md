@@ -1,16 +1,14 @@
 # evalcommand-plugin
 People in the powercord discord server wanted it, so I made it :sunglasses:
 
-### Information
+--- 
 
-## Usage
-
-`<prefix>eval [ code ]`
-
-## Installing
+### Installing
 
 1. Run `git clone https://github.com/Sxmurai/evalcommand-plugin/` in your plugins directory. (<powercord dir>/src/Powercord/plugins)
 2. Restart discord and you should be good!
+  
+---
 
 ### Settings
 
@@ -27,6 +25,12 @@ Here are all of the keys you can use:
 - `{output}` = The eval output
 
 - `{type}` = The return type.
+
+- `{input}` = Whatever you inputted.
+
+**Reminder**: The text must be below 2000 characters. Be mindful of that!
+
+> Example: `⏱️ Took {time}{n}🔍 Typeof {type}{n}{output}`
 
 ## Token Replacer
 
