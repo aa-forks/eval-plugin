@@ -44,7 +44,6 @@ You may format your output to whatever you'd like! Here is a key:
 
 ## Snippet
 
-Command Usage:
 ![alt text](https://i.imgur.com/ZPJiiQY.gif "Example Usage")
 
 ---
