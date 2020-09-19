@@ -34,7 +34,11 @@ module.exports = class EvalCommand extends Plugin {
             hr = process.hrtime(hrstart);
           }
 
-          const evaluated = inspect(toEval, false);
+          let evaluated = inspect(toEval, false);
+
+          evaluated = evaluated.toString();
+          if (powercord.account && powercord.account.token)
+            evaluated = evaluated.replace(powercord.account.token, replace);
 
           return {
             send: false,
@@ -46,10 +50,7 @@ module.exports = class EvalCommand extends Plugin {
               .replace(new RegExp("{type}", "gi"), EvalCommand.type(toEval))
               .replace(
                 new RegExp(`{output}`, "gi"),
-                `\`\`\`js\n${evaluated
-                  .toString()
-                  .replace(powercord.account.token, replace)
-                  .substring(0, 1950)}\`\`\``
+                `\`\`\`js\n${evaluated.toString().substring(0, 1950)}\`\`\``
               )
               .replace(new RegExp("{n}", "gi"), "\n")
               .replace(
