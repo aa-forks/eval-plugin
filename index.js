@@ -2,8 +2,7 @@ const { Plugin } = require("powercord/entities");
 const { inspect } = require("util");
 
 const {
-  functions: { isPromise, type },
-  Parser,
+  functions: { isPromise, type, parse },
 } = require("./util");
 
 const Settings = require("./Settings.jsx");
@@ -46,8 +45,7 @@ module.exports = class EvalCommand extends Plugin {
             )}\``,
           };
 
-        const parser = new Parser();
-        const { flags, phrases } = parser.parse(
+        const { flags, phrases } = parse(
           args.join(" ").replace(/```js/, "").replace(/```/, "").trim()
         );
 
