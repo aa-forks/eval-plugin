@@ -12,7 +12,7 @@ A feature rich eval command for your powercord uses!
 
 ---
 
-## Settings 
+## Settings
 
 I have implemented a few settings to make the plugin a bit more customizable:
 
@@ -21,6 +21,8 @@ I have implemented a few settings to make the plugin a bit more customizable:
 ![alt text](https://i.imgur.com/FomxfVx.png "Auto completion example")
 
 You may set this to whatever you'd like! It just has to be a number though.
+
+You can also clear the message cache just in case, aswell as disable auto completion.
 
 2. **Token Replacer. If you are storing your token to prevent logouts, there is a way to replace your token, just in case!**
 
@@ -68,4 +70,4 @@ If you have programming knowledge, fork and make a PR, I'll look into it as quic
 
 ---
 
-ANYTHING YOU DO WITH THIS, I AM __NOT__ LIABLE FOR! YOU ARE AT FAULT FOR WHATEVER YOU DO!
+ANYTHING YOU DO WITH THIS, I AM **NOT** LIABLE FOR! YOU ARE AT FAULT FOR WHATEVER YOU DO!

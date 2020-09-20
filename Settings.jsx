@@ -1,44 +1,73 @@
 const { React } = require("powercord/webpack");
-const { TextInput, SwitchItem } = require("powercord/components/settings");
+const {
+  SwitchItem,
+  TextInput,
+  ButtonItem,
+} = require("powercord/components/settings");
+const { Button } = require("powercord/components");
 
-module.exports = ({ getSetting, updateSetting }) => (
-  <div>
-    <TextInput
-      note="Text to replace your token with"
-      defaultValue={getSetting("tokenReplacer", "[REDACTED]")}
-      onChange={(val) => updateSetting("tokenReplacer", val)}
-    >
-      Token Replacer
-    </TextInput>
+module.exports = class Settings extends React.Component {
+  render() {
+    const { getSetting, toggleSetting, updateSetting } = this.props;
 
-    <TextInput
-      note="Custom formatting! Check out the github repo for more info."
-      defaultValue={getSetting(
-        "evalFormat",
-        "⏱️ Took {time}{n}🔍 Typeof {type}{n}{output}"
-      )}
-      onChange={(val) => updateSetting("evalFormat", val)}
-    >
-      Output Formatting
-    </TextInput>
+    return (
+      <div>
+        <TextInput
+          note="Text to replace your token with"
+          defaultValue={getSetting("tokenReplacer", "[REDACTED]")}
+          onChange={(val) => updateSetting("tokenReplacer", val)}
+        >
+          Token Replacer
+        </TextInput>
+        <TextInput
+          note="Custom formatting! Check out the github repo for more info."
+          defaultValue={getSetting(
+            "evalFormat",
+            "⏱️ Took {time}{n}🔍 Typeof {type}{n}{output}"
+          )}
+          onChange={(val) => updateSetting("evalFormat", val)}
+        >
+          Output Formatting
+        </TextInput>
+        <TextInput
+          note="Amount of messages to cache for auto completion"
+          defaultValue={getSetting("autoCompleteAmount", 25)}
+          onChange={(val) =>
+            updateSetting("autoCompleteAmount", isNaN(val) ? 25 : Number(val))
+          }
+          disabled={!getSetting("autoCompleteToggle")}
+        >
+          Auto Complete
+        </TextInput>
 
-    <TextInput
-      note="Amount of messages to hold for autocompletion"
-      defaultValue={getSetting("autoCompleteAmount", 25)}
-      onChange={(val) =>
-        updateSetting("autoCompleteAmount", isNaN(val) ? 25 : Number(val))
-      }
-    >
-      Auto Complete
-    </TextInput>
+        <SwitchItem
+          note="Turns auto complete on or off."
+          value={getSetting("autoCompleteToggle", true)}
+          onChange={() => toggleSetting("autoCompleteToggle")}
+        >
+          Auto Complete
+        </SwitchItem>
 
-    <SwitchItem
-      note="For the users who are inexpirenced. Soon™"
-      defaultValue={getSetting("safeEval", true)}
-      onChange={updateSetting("safeEval", true)}
-      disabled
-    >
-      Basic/Safe Evaluate
-    </SwitchItem>
-  </div>
-);
+        <SwitchItem
+          note="For the users who are inexpirenced. I'm not sure why you'd want this, but it's here just in case."
+          value={getSetting("safeEval", false)}
+          onChange={() => toggleSetting("safeEval")}
+        >
+          Basic/Safe Evaluate
+        </SwitchItem>
+
+        <ButtonItem
+          note="Clear all of the auto complete cache, just in case."
+          disabled={!getSetting("autoCompleteToggle")}
+          button="Clear Data"
+          color={Button.Colors.RED}
+          onClick={() =>
+            (powercord.api.commands.commands["eval"].messages = [])
+          }
+        >
+          Clear Auto Complete Cache
+        </ButtonItem>
+      </div>
+    );
+  }
+};
