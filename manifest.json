@@ -1,6 +1,6 @@
 {
   "name": "Eval Plugin",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "An eval command plugin to evaluate JavaScript in discord.",
   "author": "aesthetical#2545 (Sxmurai)",
   "license": "MIT"
