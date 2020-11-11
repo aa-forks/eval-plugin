@@ -1,3 +1,5 @@
+**NOTE**: this plugin will probably get fucked in v3 of powercord, so I'm archiving it. You can still use it, but be weary.
+
 # Eval Plugin
 
 A feature rich eval command for your powercord uses!
