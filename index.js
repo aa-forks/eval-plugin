@@ -1,5 +1,5 @@
-/* Powercord Related Items */
-const { Plugin } = require("powercord/entities");
+/* Vizality Related Items */
+const { Plugin } = require("@vizality/entities");
 
 /* Eval command specific */
 const { inspect } = require("util");
@@ -24,14 +24,14 @@ module.exports = class EvalCommand extends Plugin {
     const allowAutoComplete = this.settings.get("autoCompleteToggle", true);
 
     // Register Eval settings
-    powercord.api.settings.registerSettings("eval-plugin", {
+    vizality.api.settings.registerSettings("eval-plugin", {
       category: this.entityID,
       label: "Eval Plugin",
       render: Settings,
     });
 
     // Eval command, of course
-    powercord.api.commands.registerCommand({
+    vizality.api.commands.registerCommand({
       command: "eval",
       aliases: ["evaluate"],
       description: "Evaluates any JavaScript code",
@@ -44,7 +44,7 @@ module.exports = class EvalCommand extends Plugin {
             send: false,
             result: `Invalid usage! Valid Usage: \`${this.usage.replace(
               "{c}",
-              powercord.api.commands.prefix + this.command
+              vizality.api.commands.prefix + this.command
             )}\``,
           };
 
@@ -106,8 +106,8 @@ module.exports = class EvalCommand extends Plugin {
 
           let returned = inspect(toEval, false, depth).toString();
 
-          if (powercord.account && powercord.account.token)
-            returned = returned.replace(powercord.account.token, replace);
+          if (vizality.account && vizality.account.token)
+            returned = returned.replace(vizality.account.token, replace);
 
           return {
             send: false,
@@ -140,16 +140,16 @@ module.exports = class EvalCommand extends Plugin {
 
     // @TODO: improve this garbage
     if (allowAutoComplete) {
-      powercord.api.commands.commands["eval"].messages = [];
+      vizality.api.commands.commands["eval"].messages = [];
 
-      const messages = powercord.api.commands.commands["eval"].messages;
+      const messages = vizality.api.commands.commands["eval"].messages;
 
       setInterval(() => {
         if (messages.length > autoCompleteAmount)
           messages.slice(0, autoCompleteAmount);
       }, 5000);
 
-      powercord.api.commands.commands["eval"].autocomplete = (args) => {
+      vizality.api.commands.commands["eval"].autocomplete = (args) => {
         if (!args || !args.length) return false;
 
         return {
@@ -165,7 +165,7 @@ module.exports = class EvalCommand extends Plugin {
   }
 
   pluginWillUnload() {
-    powercord.api.commands.unregisterCommand("eval");
-    powercord.api.settings.unregisterSettings("eval-plugin");
+    vizality.api.commands.unregisterCommand("eval");
+    vizality.api.settings.unregisterSettings("eval-plugin");
   }
 };
