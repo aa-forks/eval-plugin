@@ -12,7 +12,7 @@ const { Script, createContext } = require("vm");
 const Settings = require("./Settings.jsx");
 
 module.exports = class EvalCommand extends Plugin {
-  startPlugin() {
+  onStart() {
     // All of the settings. Looks ugly but idk how else to make this look "pretty"
     const replace = this.settings.get("tokenReplacer", "[REDACTED]");
     const format = this.settings.get(
@@ -164,7 +164,7 @@ module.exports = class EvalCommand extends Plugin {
     }
   }
 
-  pluginWillUnload() {
+  onStop() {
     vizality.api.commands.unregisterCommand("eval");
     vizality.api.settings.unregisterSettings("eval-plugin");
   }
