@@ -1,10 +1,10 @@
-const { React } = require("powercord/webpack");
+const { React } = require("@vizality/webpack");
 const {
   SwitchItem,
   TextInput,
   ButtonItem,
-} = require("powercord/components/settings");
-const { Button } = require("powercord/components");
+} = require("@vizality/components/settings");
+const { Button } = require("@vizality/components");
 
 module.exports = class Settings extends React.Component {
   render() {
@@ -62,7 +62,7 @@ module.exports = class Settings extends React.Component {
           button="Clear Data"
           color={Button.Colors.RED}
           onClick={() =>
-            (powercord.api.commands.commands["eval"].messages = [])
+            (vizality.api.commands.commands["eval"].messages = [])
           }
         >
           Clear Auto Complete Cache
