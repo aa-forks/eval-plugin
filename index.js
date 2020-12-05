@@ -24,9 +24,9 @@ module.exports = class EvalCommand extends Plugin {
     const allowAutoComplete = this.settings.get("autoCompleteToggle", true);
 
     // Register Eval settings
-    vizality.api.settings.registerSettings("eval-plugin", {
-      category: this.entityID,
-      label: "Eval Plugin",
+    vizality.api.settings.registerAddonSettings({
+      id: this.entityID,
+      heading: "Eval Plugin Settings",
       render: Settings,
     });
 
@@ -166,6 +166,6 @@ module.exports = class EvalCommand extends Plugin {
 
   onStop() {
     vizality.api.commands.unregisterCommand("eval");
-    vizality.api.settings.unregisterSettings("eval-plugin");
+    vizality.api.settings.unregisterSettings(this.entityID);
   }
 };
