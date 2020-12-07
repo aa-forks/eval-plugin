@@ -110,8 +110,7 @@ module.exports = class EvalCommand extends Plugin {
           return {
             send: false,
             result: format
-              .
-            (
+              .replace(
                 new RegExp("{time}", "gi"),
                 `${hr[0] > 0 ? `${hr[0]}s ` : ""}${hr[1] / 1000000}ms`
               )
