@@ -25,7 +25,7 @@ module.exports = class EvalCommand extends Plugin {
 
     // Register Eval settings
     vizality.api.settings.registerAddonSettings({
-      id: this.addonID,
+      id: this.addonId,
       heading: "Eval Plugin Settings",
       render: Settings,
     });
@@ -166,6 +166,6 @@ module.exports = class EvalCommand extends Plugin {
 
   onStop() {
     vizality.api.commands.unregisterCommand("eval");
-    vizality.api.settings.unregisterSettings(this.addonID);
+    vizality.api.settings.unregisterSettings(this.addonId);
   }
 };
