@@ -1,5 +1,6 @@
 /* Vizality Related Items */
 const { Plugin } = require("@vizality/entities");
+const { getModule } = require("@vizality/webpack");
 
 /* Eval command specific */
 const { inspect } = require("util");
@@ -104,10 +105,7 @@ module.exports = class EvalCommand extends Plugin {
             hr = process.hrtime(start);
           }
 
-          let returned = inspect(toEval, false, depth).toString();
-
-          if (vizality.account && vizality.account.token)
-            returned = returned.replace(vizality.account.token, replace);
+          let returned = inspect(toEval, false, depth).toString().replace(getModule("getToken").getToken(), replace);
 
           return {
             send: false,
