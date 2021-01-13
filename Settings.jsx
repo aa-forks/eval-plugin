@@ -1,4 +1,4 @@
-const { React } = require("@vizality/webpack");
+const React = require("react");
 const {
   SwitchItem,
   TextInput,
