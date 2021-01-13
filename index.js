@@ -13,7 +13,7 @@ const { Script, createContext } = require("vm");
 const Settings = require("./Settings.jsx");
 
 module.exports = class EvalCommand extends Plugin {
-  onStart() {
+  start() {
     // All of the settings. Looks ugly but idk how else to make this look "pretty"
     const replace = this.settings.get("tokenReplacer", "[REDACTED]");
     const format = this.settings.get(
@@ -23,13 +23,6 @@ module.exports = class EvalCommand extends Plugin {
     const safeEval = this.settings.get("safeEval", false);
     const autoCompleteAmount = this.settings.get("autoCompleteAmount", 25);
     const allowAutoComplete = this.settings.get("autoCompleteToggle", true);
-
-    // Register Eval settings
-    vizality.api.settings.registerAddonSettings({
-      id: this.addonId,
-      heading: "Eval Plugin Settings",
-      render: Settings,
-    });
 
     // Eval command, of course
     vizality.api.commands.registerCommand({
@@ -162,8 +155,7 @@ module.exports = class EvalCommand extends Plugin {
     }
   }
 
-  onStop() {
+  stop() {
     vizality.api.commands.unregisterCommand("eval");
-    vizality.api.settings.unregisterSettings(this.addonId);
   }
 };
